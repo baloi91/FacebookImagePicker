@@ -183,7 +183,9 @@ extension FacebookAlbumController: FacebookAlbumDetailPickerDelegate {
                                                successImageModels: successModels,
                                                errorImageModels: errorModels,
                                                errors: errors)
-            self.dismissPicker()
+            if !self.isCollectionView {
+                self.dismissPicker()
+            }
         }
     }
 }

@@ -117,14 +117,18 @@ class ViewController: UIViewController {
         FacebookImagePicker.pickerConfig.maximumSelectedPictures = 5
         FacebookImagePicker.pickerConfig.uiConfig.previewPhotoSize = .full
         FacebookImagePicker.pickerConfig.allowAllSelection = true
-        FacebookImagePicker.pickerConfig.picturePerRow = 3
+        FacebookImagePicker.pickerConfig.picturePerRow = 2
         FacebookImagePicker.pickerConfig.displayTaggedAlbum = true
+        FacebookImagePicker.pickerConfig.pictureCornerRadius = 10
 
         // Make some customisation
         //self.someCustomisation()
 
-        // Present picker 
-        picker.presentFacebookAlbumImagePicker(from: self, delegate: self)
+        // Present picker
+        let collectionController = picker.getFacebookAlbumImageCollection(delegate: self)
+        self.present(collectionController, animated: true, completion: nil)
+        
+//        picker.presentFacebookAlbumImagePicker(from: self, delegate: self)
     }
 
     @IBAction func doDeleteClick(_ sender: Any) {

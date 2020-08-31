@@ -30,11 +30,17 @@
 				<string>fb351545812058212</string>
 			</array>
 		</dict>
+        <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>fb341687490201153</string>
+        </array>
+        </dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>351545812058212</string>
+	<string>341687490201153</string>
 	<key>FacebookDisplayName</key>
 	<string>GBHFacebookImagePicker</string>
 	<key>LSApplicationQueriesSchemes</key>

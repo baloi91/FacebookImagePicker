@@ -40,4 +40,21 @@ public class FacebookImagePicker: NSObject {
 
         return navigationController
     }
+    
+    /// Get album picker
+    ///
+    /// - Parameters:
+    ///   - delegate: delegate for GBHFacebookImagePickerDelegate
+    /// - Returns: The album picker controller
+    public final func getFacebookAlbumImageCollection(delegate: FacebookImagePickerDelegate) -> UIViewController {
+
+        // Create album collection
+        let albumPicker = FacebookAlbumController(facebookController: facebookController, listView: true)
+        albumPicker.delegate = delegate
+
+        // Embed in navigation controller
+        let navigationController = FacebookImagePickerNavigationController(rootViewController: albumPicker)
+
+        return navigationController
+    }
 }

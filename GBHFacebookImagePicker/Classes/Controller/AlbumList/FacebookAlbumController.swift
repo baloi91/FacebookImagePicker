@@ -14,13 +14,15 @@ final class FacebookAlbumController: UIViewController {
     private lazy var stateViewController = ContentStateViewController()
     
     weak var delegate: FacebookImagePickerDelegate?
+    private var isCollectionView = false
     
     private var facebookController: FacebookController
     
     // MARK: - Lifecycle
     
-    init(facebookController: FacebookController) {
+    init(facebookController: FacebookController, listView: Bool = false) {
         self.facebookController = facebookController
+        self.isCollectionView = listView
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -53,9 +55,11 @@ final class FacebookAlbumController: UIViewController {
     }
     
     private func prepareCloseButton() {
-        let closeButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(self.closePicker))
-        closeButton.tintColor = FacebookImagePicker.pickerConfig.uiConfig.closeButtonColor
-        self.navigationItem.rightBarButtonItem = closeButton
+        if !isCollectionView {
+            let closeButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(self.closePicker))
+            closeButton.tintColor = FacebookImagePicker.pickerConfig.uiConfig.closeButtonColor
+            self.navigationItem.rightBarButtonItem = closeButton
+        }
     }
     
     // MARK: - Action
@@ -112,9 +116,16 @@ final class FacebookAlbumController: UIViewController {
     // MARK: - Renders
     
     private func render(_ albums: [FacebookAlbum]) {
-        let albumsListController = FacebookAlbumListController(albums: albums)
-        albumsListController.delegate = self
-        self.stateViewController.transition(to: .render(albumsListController))
+        if isCollectionView {
+            let albumsListController = FacebookAlbumCollectionViewController(albums: albums)
+            albumsListController.delegate = self
+            self.stateViewController.transition(to: .render(albumsListController))
+        }
+        else {
+            let albumsListController = FacebookAlbumListController(albums: albums)
+            albumsListController.delegate = self
+            self.stateViewController.transition(to: .render(albumsListController))
+        }
     }
     
     // MARK: - Navigation

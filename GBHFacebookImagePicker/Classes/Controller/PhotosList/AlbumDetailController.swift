@@ -134,7 +134,7 @@ final class AlbumDetailController: UIViewController {
     }
     
     @objc func actionSelectBarButton(sender: UIBarButtonItem) {
-        self.delegate?.didSelectImages(images: selectedImages)
+//        self.delegate?.didSelectImages(images: selectedImages)
     }
     
     @objc func didSelectAllPicture(sender: UIBarButtonItem) {
@@ -163,6 +163,7 @@ final class AlbumDetailController: UIViewController {
 extension AlbumDetailController: AlbumDetailDelegate {
     func didSelectImage(image: FacebookImage) {
         self.selectedImages.append(image)
+        self.delegate?.didPickImage(image: image)
         
         if FacebookImagePicker.pickerConfig.maximumSelectedPictures == 1 {
             self.delegate?.didSelectImages(images: selectedImages)
@@ -172,6 +173,7 @@ extension AlbumDetailController: AlbumDetailDelegate {
     func didDeselectImage(image: FacebookImage) {
         if let index = self.selectedImages.firstIndex(where: { $0.imageId == image.imageId }) {
             self.selectedImages.remove(at: index)
+            self.delegate?.didRemoveImage(image: image)
         }
     }
     

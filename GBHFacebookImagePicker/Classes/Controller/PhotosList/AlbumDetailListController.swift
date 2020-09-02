@@ -22,6 +22,7 @@ final class AlbumDetailListController: UIViewController {
     private var pictureCollection: UICollectionView?
     
     weak var delegate: AlbumDetailDelegate?
+    weak var LoiCustomDelegate: AlbumDetailDelegate?
     
     // MARK: - Lifecycle
     

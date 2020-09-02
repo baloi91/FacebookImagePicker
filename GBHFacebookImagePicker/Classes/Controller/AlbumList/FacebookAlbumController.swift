@@ -15,7 +15,7 @@ final class FacebookAlbumController: UIViewController {
     
     weak var delegate: FacebookImagePickerDelegate?
     private var isCollectionView = false
-    
+    var pendingImage: [FacebookImage]
     private var facebookController: FacebookController
     
     // MARK: - Lifecycle
@@ -23,6 +23,7 @@ final class FacebookAlbumController: UIViewController {
     init(facebookController: FacebookController, listView: Bool = false) {
         self.facebookController = facebookController
         self.isCollectionView = listView
+        self.pendingImage = [FacebookImage]()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -151,6 +152,18 @@ extension FacebookAlbumController: FacebookAlbumPickerDelegate {
 }
 
 extension FacebookAlbumController: FacebookAlbumDetailPickerDelegate {
+    func didPickImage(image: FacebookImage) {
+        pendingImage.append(image)
+        self.delegate?.facebookImagePickerAddImage(image: image)
+    }
+    
+    func didRemoveImage(image: FacebookImage) {
+        if let index = self.pendingImage.firstIndex(where: { $0.imageId == image.imageId }) {
+            self.pendingImage.remove(at: index)
+            self.delegate?.facebookImagePickerRemoveImage(image: image)
+        }
+    }
+    
     func didPressFinishSelection(images: [FacebookImage]) {
         //
     }
@@ -189,3 +202,4 @@ extension FacebookAlbumController: FacebookAlbumDetailPickerDelegate {
         }
     }
 }
+

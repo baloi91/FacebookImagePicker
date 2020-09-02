@@ -114,9 +114,9 @@ class ViewController: UIViewController {
         // Init picker 
         let picker = FacebookImagePicker()
 
-        FacebookImagePicker.pickerConfig.maximumSelectedPictures = 5
+        FacebookImagePicker.pickerConfig.maximumSelectedPictures = 3
         FacebookImagePicker.pickerConfig.uiConfig.previewPhotoSize = .full
-        FacebookImagePicker.pickerConfig.allowAllSelection = true
+        FacebookImagePicker.pickerConfig.allowAllSelection = false
         FacebookImagePicker.pickerConfig.picturePerRow = 2
         FacebookImagePicker.pickerConfig.displayTaggedAlbum = true
         FacebookImagePicker.pickerConfig.pictureCornerRadius = 10
@@ -138,6 +138,14 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: FacebookImagePickerDelegate {
+    func facebookImagePickerAddImage(image: FacebookImage) {
+        print(image.imageId)
+    }
+    
+    func facebookImagePickerRemoveImage(image: FacebookImage) {
+        print(image.imageId)
+    }
+    
 
     // MARK: - GBHFacebookImagePicker Protocol
 

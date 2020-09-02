@@ -10,4 +10,7 @@ import Foundation
 protocol FacebookAlbumDetailPickerDelegate: class {
     func didSelectImages(images: [FacebookImage])
     func didPressFinishSelection(images: [FacebookImage])
+    
+    func didPickImage(image: FacebookImage)
+    func didRemoveImage(image: FacebookImage)
 }

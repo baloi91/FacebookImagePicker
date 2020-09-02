@@ -38,6 +38,9 @@ public protocol FacebookImagePickerDelegate: class {
 
     /// Called when image picker completed dismissing
     func facebookImagePickerDismissed()
+    
+    func facebookImagePickerAddImage(image: FacebookImage)
+    func facebookImagePickerRemoveImage(image: FacebookImage)
 }
 
 // Extension to make some method optional...
